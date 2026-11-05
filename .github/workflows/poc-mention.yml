@@ -1,0 +1,16 @@
+name: poc-mention
+on:
+  workflow_dispatch:
+permissions:
+  issues: write
+jobs:
+  mention:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open an issue that mentions the agent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "POC mention test $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --body "@Frankcnsa POC 测试：来自 github-actions 的请求（记录模式，不要改代码）。"
